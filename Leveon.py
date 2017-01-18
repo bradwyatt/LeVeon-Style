@@ -1,5 +1,6 @@
 """
-Created by Brad Wyatt
+Created as a GIF meme mocking NBC's Frogger depiction of Le'Veon Bell
+Game was originally Chiefs versus Steelers on Jan 15th, 2017
 """
 import pygame, random, sys
 from pygame.locals import *
@@ -9,7 +10,7 @@ menuOn = 1
 firstMessage = 1
 Rooms = []
 (screenWidth, screenHeight) = 728, 900
-SCORE, scoreBlit = 0, 0
+SCORE = 0
 player = None
 screen = None
 keys = [False, False, False, False]
@@ -209,7 +210,7 @@ class Goal(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = images["player_left"]
+        self.image = images["spr_player"]
         self.rect = self.image.get_rect()
         allsprites.add(self)
         self.playerWidth, self.playerHeight = (65, 80)
@@ -228,11 +229,10 @@ class Room():
         reset()
 
 def reset():
-    global SCORE, scoreBlit, scoreDisappearTimer
-    SCORE, scoreBlit, scoreDisappearTimer = 0, 0, 0
+    global SCORE
+    SCORE = 0
     player.pos = [screenWidth/2-30, screenHeight-145]
     player.rect.topleft = (player.pos[0], player.pos[1])
-    player.image = images["player_left"]
     keys = [False, False, False, False]
     enemies[0].rect.topleft = (0, 120)
     enemies[1].rect.topleft = (300, 120)
@@ -270,13 +270,12 @@ pygame.display.set_caption("Le'Veon Style")
 spr_goal = load_image("sprites/goal.png", "spr_goal", True, True)
 spr_touchdown = load_image("sprites/touchdown.png", "spr_touchdown", True, True)
 goals = [ Goal() for i in range(5)]
-timer = load_image("sprites/timer.png", "spr_timer", True, True)
 #other sprites
 spr_enemy = load_image("sprites/patriots.png", "spr_enemy", False, True)
 enemies = [ Enemy() for i in range(11)]
 spr_steelers = load_image("sprites/steelers.png", "spr_steelers", True, True)
 steelers = [ Steelers() for i in range(6)]
-player_left = load_image("sprites/leveonbell.png", "player_left", True, True)
+spr_player = load_image("sprites/leveonbell.png", "spr_player", True, True)
 player = Player()
 #font and texts
 arcadeFont = pygame.font.Font("fonts/ARCADE.ttf", 16)
@@ -286,26 +285,26 @@ arialFont = pygame.font.SysFont('Arial', 32)
 #backgrounds
 startMenu = pygame.image.load("sprites/startmenu.png").convert()
 startMenu = pygame.transform.scale(startMenu, (screenWidth, screenHeight))
-infoScreen = pygame.image.load("sprites/infoscreen.bmp").convert()
-infoScreen = pygame.transform.scale(infoScreen, (screenWidth, screenHeight))
 gameOver = pygame.image.load("sprites/gameover.png").convert()
 gameOver = pygame.transform.scale(gameOver, (screenWidth, screenHeight))
 winner = pygame.image.load("sprites/winner.png").convert()
 winner = pygame.transform.scale(winner, (screenWidth, screenHeight))
 bgwater = pygame.image.load("sprites/footballfield.jpg").convert()
 bgwater = pygame.transform.scale(bgwater, (screenWidth, screenHeight))
-blackbg = pygame.image.load("sprites/blackbg.jpg").convert()
-blackbg = pygame.transform.scale(blackbg, (screenWidth, 30))
 #window
 gameicon = pygame.image.load("sprites/bellico.png")
 pygame.display.set_icon(gameicon)
 pygame.display.set_caption('Le\'Veon Style')
 pygame.mouse.set_visible(0)
 #sounds
-snd_eat = load_sound("sounds/snd_eat.wav", "snd_eat")
-sounds["snd_eat"].set_volume(.2)
+snd_leap = load_sound("sounds/snd_leap.wav", "snd_leap")
+sounds["snd_leap"].set_volume(.5)
 snd_playerdie = load_sound("sounds/playerdie.wav", "snd_playerdie")
 sounds["snd_playerdie"].set_volume(.3)
+#music loop
+pygame.mixer.music.load("sounds/froggertheme.mp3")
+pygame.mixer.music.set_volume(.2)
+pygame.mixer.music.play(-1)
 #Main
 while running:
     if(firstMessage == 1):
@@ -321,8 +320,6 @@ while running:
         GameOver(screen)
     elif menuOn == 3:
         Winner(screen)
-    if(scoreBlit > 0): #Score Timer above player sprite
-        scoreDisappearTimer += 1
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
@@ -350,22 +347,22 @@ while running:
             elif event.key==pygame.K_RIGHT:
                 keys[3]=False
     if keys[0]:#up
-        sounds["snd_eat"].play()
+        sounds["snd_leap"].play()
         if player.pos[1] > 50: #boundary, 32 is block, added a few extra pixels to make it look nicer
             player.pos[1] -= player.speedY
         keys[0]=False
     if keys[2]:#down
-        sounds["snd_eat"].play()
+        sounds["snd_leap"].play()
         if player.pos[1] < screenHeight-95: 
             player.pos[1] += player.speedY
         keys[2]=False
     if keys[1]:#left
-        sounds["snd_eat"].play()
+        sounds["snd_leap"].play()
         if player.pos[0] > 32:
             player.pos[0] -= player.speedX
         keys[1]=False
     if keys[3]:#right
-        sounds["snd_eat"].play()
+        sounds["snd_leap"].play()
         if player.pos[0] < screenWidth-75:
             player.pos[0] += player.speedX
         keys[3] = False
@@ -387,8 +384,8 @@ while running:
     if SCORE == 5:
         menuOn = 3
     #Test Print Code: FOR DEBUGGING PURPOSES BELOW:
-    highScoreText = arcadeFontMain.render("TIME:", 1, (0,0,0))
-    screen.blit(highScoreText, (screenWidth/2+170, screenHeight-45))
+    timerText = arcadeFontMain.render("TIME:", 1, (0,0,0))
+    screen.blit(timerText, (screenWidth/2+170, screenHeight-45))
     timerCountdownText = arcadeFontMain.render(str(int(player.timeLeft)), 1, (0,0,0))
     screen.blit(timerCountdownText, (screenWidth-70, screenHeight-45))
     #Top Screen Design
