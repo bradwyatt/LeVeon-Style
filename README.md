@@ -1,5 +1,9 @@
 # LeVeon-Style
-Based on the NBC meme during the Steelers-Chiefs game.
+Based on the NBC meme during the Steelers-Chiefs game in 2017. Le'Veon Bell is known for his patience in his style of running.
 
-To play, download all of the files into a folder, and run Leveon.py
---> Must have latest Python installed in your system.
+Posted this on gfycat and got over 2,000 views:
+https://gfycat.com/shinysandyfoxhound-leveon-bell-steelers-frogger
+
+## Demo
+
+![](/Docs/leveongif.gif)
