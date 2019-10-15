@@ -35,7 +35,7 @@ def adjust_to_correct_appdir():
         #not any resource or module into the appdir 
         #a window in Tkinter can be adequate for apps without console
         #a simple print with a timeout can be enough for console apps
-        print 'Please run from an OS console.'
+        print('Please run from an OS console.')
         import time
         time.sleep(10)
         sys.exit(1)
@@ -60,7 +60,7 @@ def displayCaption():
     pygame.display.set_caption("Le'Veon Style")
 
 def quit():
-    print 'Thanks for playing'
+    print('Thanks for playing')
     sys.exit()
 
 def startplaceholder(screen):
@@ -308,7 +308,7 @@ pygame.mixer.music.play(-1)
 #Main
 while running:
     if(firstMessage == 1):
-        print "Please ignore the errors."
+        print("Please ignore the errors.")
         firstMessage = 0
     clock.tick(35)
     displayCaption()
@@ -322,11 +322,12 @@ while running:
         Winner(screen)
     for event in pygame.event.get():
         if event.type == QUIT:
-            running = False
+            pygame.quit()
+            sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == K_ESCAPE:
                 for i in range(0, len(sounds)):
-                    soundslist = sounds.keys() #returns list of keys in sounds
+                    soundslist = list(sounds.keys()) #returns list of keys in sounds
                     sounds[soundslist[i]].stop() #stops all sounds when go to menu
                 menuOn = 1
             elif event.key==K_UP:
