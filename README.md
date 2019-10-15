@@ -6,5 +6,5 @@ https://gfycat.com/shinysandyfoxhound-leveon-bell-steelers-frogger
 
 ## Demo
 <p align="center">
-<img src="https://github.com/bradwyatt/LeVeon-Style/blob/master/Docs/leveongif.gif?raw=true" width="500" height="400"></img>
+<img src="https://github.com/bradwyatt/LeVeon-Style-Frogger/blob/master/Docs/leveongif.gif?raw=true" width="500" height="400"></img>
 </p>
