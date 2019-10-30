@@ -1,7 +1,7 @@
 # LeVeon-Style Frogger Game
-Based on the NBC meme during the Steelers-Chiefs game in 2017. Le'Veon Bell is known for his patience in his style of running.
+Based on the meme during the NBC showing of the Steelers-Chiefs playoffs game in 2017. Le'Veon Bell is known for his patience in his style of running.
 
-Posted this on gfycat and received over 2,000 views:
+Posted the gif (from the game) on gfycat and received over 2,000 views:
 https://gfycat.com/shinysandyfoxhound-leveon-bell-steelers-frogger
 
 ## Demo
